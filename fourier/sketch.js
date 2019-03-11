@@ -46,9 +46,11 @@ function draw() {
 
     for (var i = 0; i < y.length; i++) {
       an +=
-        (yo[i] * cos((2 * PI * t * x[i]) / (width * step)) * 2) / (width * step);
+        (yo[i] * cos((2 * PI * t * x[i]) / (width * step)) * 2) /
+        (width * step);
       bn +=
-        (yo[i] * sin((2 * PI * t * x[i]) / (width * step)) * 2) / (width * step);
+        (yo[i] * sin((2 * PI * t * x[i]) / (width * step)) * 2) /
+        (width * step);
     }
 
     for (var i = 0; i < y.length; i++) {
@@ -56,8 +58,6 @@ function draw() {
         an * cos((2 * PI * t * x[i]) / (width * step)) +
         bn * sin((2 * PI * t * x[i]) / (width * step));
     }
-
-    console.log(bn);
   }
 
   drawArray(x, y);
