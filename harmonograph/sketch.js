@@ -7,3 +7,13 @@ function setup() {
 function draw() {
 
 }
+
+function plotedX(x){
+
+  return x + width / 2;
+}
+
+function plotedY(y){
+
+  return -y + height / 2;
+}
