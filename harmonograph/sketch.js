@@ -6,6 +6,9 @@ function setup() {
 
 function draw() {
 
+  for(var t = 0; t < 1000; t += 0.01){
+
+  }
 }
 
 function plotedX(x){
