@@ -8,7 +8,12 @@ function draw() {
 
   for(var t = 0; t < 1000; t += 0.01){
 
+    plotGraph(cos(t), sin(t));
   }
+}
+
+function plotGraph(x, y){
+  point(plotedX(x), plotedY(y));
 }
 
 function plotedX(x){
