@@ -1,3 +1,6 @@
+const s = 300;
+var cnt = 1;
+
 function setup() {
   createCanvas(1200, 800);
   background(255);
@@ -6,9 +9,12 @@ function setup() {
 
 function draw() {
 
+  background(255);
+
   for(var t = 0; t < 1000; t += 0.01){
 
-    plotGraph(cos(t), sin(t));
+    stroke(cos(t) * 255, sin(t) * 255, sin(t) * 255);
+    plotGraph(t * cos(t * 17), t * sin(t * 19));
   }
 }
 
@@ -18,10 +24,10 @@ function plotGraph(x, y){
 
 function plotedX(x){
 
-  return x + width / 2;
+  return s * x + width / 2;
 }
 
 function plotedY(y){
 
-  return -y + height / 2;
+  return s * (-y) + height / 2;
 }
