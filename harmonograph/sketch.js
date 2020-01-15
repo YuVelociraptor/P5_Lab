@@ -1,4 +1,4 @@
-const s = 300;
+const s = 200;
 var cnt = 1;
 
 function setup() {
@@ -11,12 +11,23 @@ function draw() {
 
   background(255);
 
-  for(var t = 0; t < 1000; t += 0.01){
+  for(let t = 0; t < 1000; t += 0.01){
 
     stroke(cos(t) * 255, sin(t) * 255, sin(t) * 255);
 
-    var x = wavePosition(t, 1, PI / 2);
-    var y = wavePosition(t, 1, 0);
+    const w1 = 11;
+    const w2 = 13;
+    const w3 = 13;
+    const w4 = 17;
+
+    const l1 = 1;
+    const l2 = 1;
+    const l3 = 1;
+    const l4 = 1;
+
+    var x = wavePosition(t, w1, l1) + wavePosition(t, w2, l2);
+    var y = wavePosition(t, w3, l3) + wavePosition(t, w4, l4);
+
     plotGraph(x, y);
   }
 }
