@@ -14,7 +14,10 @@ function draw() {
   for(var t = 0; t < 1000; t += 0.01){
 
     stroke(cos(t) * 255, sin(t) * 255, sin(t) * 255);
-    plotGraph(t * cos(t * 17), t * sin(t * 19));
+
+    var x = wavePosition(t, 1, PI / 2);
+    var y = wavePosition(t, 1, 0);
+    plotGraph(x, y);
   }
 }
 
@@ -30,4 +33,9 @@ function plotedX(x){
 function plotedY(y){
 
   return s * (-y) + height / 2;
+}
+
+function wavePosition(t, w, l){
+
+  return sin(t * w + l);
 }
