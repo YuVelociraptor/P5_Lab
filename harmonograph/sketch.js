@@ -1,6 +1,8 @@
 const s = 200;
 let wSliders = new Array(4);
 let lSliders = new Array(4);
+let button;
+let lineFlg = false;
 
 function setup() {
   createCanvas(1200, 800);
@@ -17,13 +19,20 @@ function setup() {
     lSliders[c].position(1100, 100 * (c + 1));
     lSliders[c].style('width', '100px');
   }
+
+  button = createButton('switch');
+  button.position(1000, 700);
+  button.mousePressed(switchLinePlot);
 }
 
 function draw() {
 
   background(255);
 
-  for(let t = 0; t < 1000; t += 0.01){
+  let xb;
+  let yb;
+
+  for(let t = 0; t < 100; t += 0.01){
 
     stroke(cos(t) * 255, cos(t + 2 * PI / 3) * 255, cos(t + 4 * PI / 3) * 255);
 
@@ -42,12 +51,27 @@ function draw() {
     var x = wavePosition(t, ws[0], ls[0]) + wavePosition(t, ws[1], ls[1]);
     var y = wavePosition(t, ws[2], ls[2]) + wavePosition(t, ws[3], ls[3]);
 
-    plotGraph(x, y);
+    if(lineFlg){
+
+      if(t > 0){
+        lineGraph(xb, yb, x, y);
+
+        xb = x;
+        yb = y;
+      }
+
+    }else{
+      plotGraph(x, y);
+    }
   }
 }
 
 function plotGraph(x, y){
   point(plotedX(x), plotedY(y));
+}
+
+function lineGraph(x1, y1, x2, y2){
+  line(plotedX(x1), plotedY(y1), plotedX(x2), plotedY(y2));
 }
 
 function plotedX(x){
@@ -63,4 +87,8 @@ function plotedY(y){
 function wavePosition(t, w, l){
 
   return sin(t * w + l);
+}
+
+function switchLinePlot() {
+  lineFlg = !lineFlg;
 }
