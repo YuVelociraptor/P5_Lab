@@ -5,7 +5,7 @@ let button;
 let lineFlg = false;
 
 function setup() {
-  createCanvas(1200, 800);
+  createCanvas(window.innerWidth, window.innerHeight);
   background(255);
 
   for(let c = 0; c < wSliders.length; c++){
@@ -27,12 +27,12 @@ function setup() {
 
 function draw() {
 
-  background(255);
+  background(255, 200, 200);
 
   let xb;
   let yb;
 
-  for(let t = 0; t < 100; t += 0.01){
+  for(let t = 0; t < 1000; t += 0.01){
 
     stroke(cos(t) * 255, cos(t + 2 * PI / 3) * 255, cos(t + 4 * PI / 3) * 255);
 
