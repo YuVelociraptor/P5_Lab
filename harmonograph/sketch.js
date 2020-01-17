@@ -1,5 +1,6 @@
 const s = 200;
 let wSliders = new Array(4);
+let lSliders = new Array(4);
 
 function setup() {
   createCanvas(1200, 800);
@@ -8,7 +9,13 @@ function setup() {
   for(let c = 0; c < wSliders.length; c++){
     wSliders[c] = createSlider(0, 100, 10, 1);
     wSliders[c].position(1000, 100 * (c + 1));
-    wSliders[c].style('width', '200px');
+    wSliders[c].style('width', '100px');
+  }
+
+  for(let c = 0; c < lSliders.length; c++){
+    lSliders[c] = createSlider(0, 360, 0, 1);
+    lSliders[c].position(1100, 100 * (c + 1));
+    lSliders[c].style('width', '100px');
   }
 }
 
@@ -26,13 +33,14 @@ function draw() {
       ws[c] = wSliders[c].value();
     }
 
-    const l1 = 1;
-    const l2 = 1;
-    const l3 = 1;
-    const l4 = 1;
+    let ls = new Array(lSliders.length);
+    for(let c = 0; c < lSliders.length; c++){
 
-    var x = wavePosition(t, ws[0], l1) + wavePosition(t, ws[1], l2);
-    var y = wavePosition(t, ws[2], l3) + wavePosition(t, ws[3], l4);
+      ls[c] = lSliders[c].value() * 2 * PI / 360;
+    }
+
+    var x = wavePosition(t, ws[0], ls[0]) + wavePosition(t, ws[1], ls[1]);
+    var y = wavePosition(t, ws[2], ls[2]) + wavePosition(t, ws[3], ls[3]);
 
     plotGraph(x, y);
   }
