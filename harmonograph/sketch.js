@@ -1,6 +1,7 @@
 const s = 200;
 let wSliders = new Array(4);
 let lSliders = new Array(4);
+let dSliders = new Array(4);
 let button;
 let lineFlg = false;
 
@@ -48,8 +49,8 @@ function draw() {
       ls[c] = lSliders[c].value() * 2 * PI / 360;
     }
 
-    var x = wavePosition(t, ws[0], ls[0]) + wavePosition(t, ws[1], ls[1]);
-    var y = wavePosition(t, ws[2], ls[2]) + wavePosition(t, ws[3], ls[3]);
+    var x = wavePosition(t, ws[0], ls[0], 0) + wavePosition(t, ws[1], ls[1], 0);
+    var y = wavePosition(t, ws[2], ls[2], 0) + wavePosition(t, ws[3], ls[3], 0);
 
     if(lineFlg){
 
@@ -84,9 +85,9 @@ function plotedY(y){
   return s * (-y) + height / 2;
 }
 
-function wavePosition(t, w, l){
+function wavePosition(t, w, l, d){
 
-  return sin(t * w + l);
+  return exp(-d * t) * sin(t * w + l);
 }
 
 function switchLinePlot() {
