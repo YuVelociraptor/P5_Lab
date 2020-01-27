@@ -4,10 +4,13 @@ let lSliders = new Array(4);
 let dSliders = new Array(4);
 let button;
 let lineFlg = false;
+let center;
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   background(255);
+
+  center = min(width, height) / 2;
 
   for(let c = 0; c < wSliders.length; c++){
     wSliders[c] = createSlider(0, 100, 10, 1);
@@ -77,12 +80,12 @@ function lineGraph(x1, y1, x2, y2){
 
 function plotedX(x){
 
-  return s * x + width / 2;
+  return s * x + center;
 }
 
 function plotedY(y){
 
-  return s * (-y) + height / 2;
+  return s * (-y) + center;
 }
 
 function wavePosition(t, w, l, d){
