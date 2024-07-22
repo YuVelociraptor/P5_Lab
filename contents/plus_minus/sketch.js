@@ -21,8 +21,8 @@ const answer_max = 12;
 let count = 0;
 
 function setup() {
-  diplay_width = windowWidth * 0.97
-  display_height = windowHeight * 0.97
+  diplay_width = windowWidth * 0.97;
+  display_height = windowHeight * 0.97;
   createCanvas(diplay_width, display_height);
 
   question_length = min(diplay_width / 6, display_height / 2) * 0.95;
