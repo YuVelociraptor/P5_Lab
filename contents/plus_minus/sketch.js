@@ -8,6 +8,8 @@ let question_trim = 0;
 let button_length = 0;
 let button_trim = 0;
 
+let clear_button_length = 0;
+
 let button_start_h = 0;
 
 let var1 = 0;
@@ -18,7 +20,12 @@ let player_answer = -100;
 
 const answer_max = 16;
 
-let count = 0;
+let count = localStorage.getItem('count');
+if (count === null) {
+  count = 0;
+} else {
+  count = parseInt(count, 10);
+}
 
 function setup() {
   diplay_width = windowWidth * 0.97
@@ -33,6 +40,8 @@ function setup() {
 
   button_start_h = question_length + question_trim * 2;
 
+  clear_button_length = min(diplay_width / 10, display_height / 8) * 0.95;
+
   makeQuestion();
 }
 
@@ -46,6 +55,7 @@ function draw() {
     if(correct_answer == player_answer){
       dispOK();
       count++;
+      localStorage.setItem('count', count);
     }else{
       dispNG();
     }
@@ -53,8 +63,8 @@ function draw() {
 
   fill(0, 0, 0);
   noStroke();
-  textSize(20);
-  text(count, diplay_width - question_trim, question_trim);
+  textSize(button_length * 0.3);
+  text(countNumberText(count), diplay_width - question_trim * 2, question_trim * 2);
 
   noLoop();
 }
@@ -68,31 +78,43 @@ function mousePressed() {
     }
   }else{
 
-    let xCnt = 0;
-    let yCnt = 0;
-    for(let i = 0; i < answer_max; i++){
-  
-      if(button_trim + (xCnt + 1) * (button_length + button_trim) >= diplay_width){
-  
-        xCnt = 0;
-        yCnt++;
-      }
-      
-      let xs = button_trim + xCnt * (button_length + button_trim);
-      let ys = button_start_h + yCnt * (button_length + button_trim);
-      xCnt++;
-  
-      rect(xs, ys, button_length, button_length);
+    rect(diplay_width - question_trim * 2, question_trim * 2.1, clear_button_length, button_length * 0.3);
 
-      if(
-        mouseX > xs &&
-        mouseX < xs + button_length &&
-        mouseY > ys &&
-        mouseY < ys + button_length
-      ){
-        player_answer = i + 1;
-        display_xo = true;
-        break;
+    if(
+        mouseX > diplay_width - question_trim * 2 &&
+        mouseX < diplay_width - question_trim * 2 + clear_button_length &&
+        mouseY > question_trim * 2.1 &&
+        mouseY < question_trim * 2.1 + button_length * 0.3
+    ){
+        clearCount();
+    }else{
+
+      let xCnt = 0;
+      let yCnt = 0;
+      for(let i = 0; i < answer_max; i++){
+
+        if(button_trim + (xCnt + 1) * (button_length + button_trim) >= diplay_width){
+
+          xCnt = 0;
+          yCnt++;
+        }
+
+        let xs = button_trim + xCnt * (button_length + button_trim);
+        let ys = button_start_h + yCnt * (button_length + button_trim);
+        xCnt++;
+
+        rect(xs, ys, button_length, button_length);
+
+        if(
+            mouseX > xs &&
+            mouseX < xs + button_length &&
+            mouseY > ys &&
+            mouseY < ys + button_length
+        ){
+          player_answer = i + 1;
+          display_xo = true;
+          break;
+        }
       }
     }
   }
@@ -170,6 +192,10 @@ function questionNumberText(v){
   return v.toString().padStart(2, ' ');
 }
 
+function countNumberText(v){
+  return v.toString().padStart(3, '0');
+}
+
 function dispButton(){
 
   line(0, button_start_h, diplay_width, button_start_h);
@@ -195,4 +221,16 @@ function dispButton(){
     textSize(button_length * 0.8);
     text(questionNumberText(i + 1), xs, ys + button_length * 0.8);
   }
+
+  fill(255, 255, 255);
+  rect(diplay_width - question_trim * 2, question_trim * 2.1, clear_button_length, button_length * 0.3);
+
+  fill(0, 0, 0);
+  textSize(button_length * 0.2);
+  text('リセット', diplay_width - question_trim * 2, question_trim * 2.05 + button_length * 0.3);
+}
+
+function clearCount(){
+  count = 0;
+  localStorage.setItem('count', count);
 }
