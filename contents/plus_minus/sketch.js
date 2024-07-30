@@ -16,19 +16,19 @@ let var2 = 0;
 let correct_answer = -99;
 let player_answer = -100;
 
-const answer_max = 12;
+const answer_max = 16;
 
 let count = 0;
 
 function setup() {
-  diplay_width = windowWidth * 0.97;
-  display_height = windowHeight * 0.97;
+  diplay_width = windowWidth * 0.97
+  display_height = windowHeight * 0.97
   createCanvas(diplay_width, display_height);
 
   question_length = min(diplay_width / 6, display_height / 2) * 0.95;
   question_trim = min(diplay_width * 0.05, display_height * 0.05);
 
-  button_length = min(diplay_width / 6, display_height / 4) * 0.95;
+  button_length = min(diplay_width / 8, display_height / 5) * 0.95;
   button_trim = min(diplay_width * 0.03, display_height * 0.03);
 
   button_start_h = question_length + question_trim * 2;
@@ -59,7 +59,7 @@ function draw() {
   noLoop();
 }
 
-function mouseClicked() {
+function mousePressed() {
   if(display_xo){
     display_xo = false;
 
@@ -70,7 +70,7 @@ function mouseClicked() {
 
     let xCnt = 0;
     let yCnt = 0;
-    for(let i = 0; i < 12; i++){
+    for(let i = 0; i < answer_max; i++){
   
       if(button_trim + (xCnt + 1) * (button_length + button_trim) >= diplay_width){
   
