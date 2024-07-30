@@ -78,11 +78,9 @@ function mousePressed() {
     }
   }else{
 
-    rect(diplay_width - question_trim * 2, question_trim * 2.1, clear_button_length, button_length * 0.3);
-
     if(
-        mouseX > diplay_width - question_trim * 2 &&
-        mouseX < diplay_width - question_trim * 2 + clear_button_length &&
+        mouseX > diplay_width - question_trim * 2.5 &&
+        mouseX < diplay_width - question_trim * 2.5 + clear_button_length &&
         mouseY > question_trim * 2.1 &&
         mouseY < question_trim * 2.1 + button_length * 0.3
     ){
@@ -223,11 +221,11 @@ function dispButton(){
   }
 
   fill(255, 255, 255);
-  rect(diplay_width - question_trim * 2, question_trim * 2.1, clear_button_length, button_length * 0.3);
+  rect(diplay_width - question_trim * 2.5, question_trim * 2.1, clear_button_length, button_length * 0.3);
 
   fill(0, 0, 0);
   textSize(button_length * 0.2);
-  text('リセット', diplay_width - question_trim * 2, question_trim * 2.05 + button_length * 0.3);
+  text('リセット', diplay_width - question_trim * 2.5, question_trim * 2.05 + button_length * 0.3);
 }
 
 function clearCount(){
