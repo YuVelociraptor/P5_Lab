@@ -18,7 +18,12 @@ let player_answer = -100;
 
 const answer_max = 16;
 
-let count = 0;
+let count = localStorage.getItem('count');
+if (count === null) {
+  count = 0;
+} else {
+  count = parseInt(count, 10);
+}
 
 function setup() {
   diplay_width = windowWidth * 0.97
@@ -46,6 +51,7 @@ function draw() {
     if(correct_answer == player_answer){
       dispOK();
       count++;
+      localStorage.setItem('count', count);
     }else{
       dispNG();
     }
@@ -195,4 +201,9 @@ function dispButton(){
     textSize(button_length * 0.8);
     text(questionNumberText(i + 1), xs, ys + button_length * 0.8);
   }
+}
+
+function clearCount(){
+  count = 0;
+  localStorage.setItem('count', count);
 }
