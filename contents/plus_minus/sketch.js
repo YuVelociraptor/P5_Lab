@@ -8,7 +8,8 @@ let question_trim = 0;
 let button_length = 0;
 let button_trim = 0;
 
-let clear_button_length = 0;
+let clear_button_width = 0;
+let clear_button_x = 0;
 
 let button_start_h = 0;
 
@@ -40,7 +41,8 @@ function setup() {
 
   button_start_h = question_length + question_trim * 2;
 
-  clear_button_length = min(diplay_width / 10, display_height / 8) * 0.95;
+  clear_button_width = min(diplay_width / 8, display_height / 5) * 0.95;
+  clear_button_x = diplay_width - question_trim * 3;
 
   makeQuestion();
 }
@@ -64,7 +66,7 @@ function draw() {
   fill(0, 0, 0);
   noStroke();
   textSize(button_length * 0.3);
-  text(countNumberText(count), diplay_width - question_trim * 2, question_trim * 2);
+  text(countNumberText(count), clear_button_x, question_trim * 2);
 
   noLoop();
 }
@@ -79,8 +81,8 @@ function mousePressed() {
   }else{
 
     if(
-        mouseX > diplay_width - question_trim * 2.5 &&
-        mouseX < diplay_width - question_trim * 2.5 + clear_button_length &&
+        mouseX > clear_button_x &&
+        mouseX < clear_button_x + clear_button_width &&
         mouseY > question_trim * 2.1 &&
         mouseY < question_trim * 2.1 + button_length * 0.3
     ){
@@ -221,11 +223,11 @@ function dispButton(){
   }
 
   fill(255, 255, 255);
-  rect(diplay_width - question_trim * 2.5, question_trim * 2.1, clear_button_length, button_length * 0.3);
+  rect(clear_button_x, question_trim * 2.1, clear_button_width, button_length * 0.3);
 
   fill(0, 0, 0);
   textSize(button_length * 0.2);
-  text('リセット', diplay_width - question_trim * 2.5, question_trim * 2.05 + button_length * 0.3);
+  text('リセット', clear_button_x, question_trim * 2.05 + button_length * 0.3);
 }
 
 function clearCount(){
