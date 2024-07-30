@@ -59,8 +59,8 @@ function draw() {
 
   fill(0, 0, 0);
   noStroke();
-  textSize(20);
-  text(count, diplay_width - question_trim, question_trim);
+  textSize(button_length * 0.3);
+  text(countNumberText(count), diplay_width - question_trim * 2, question_trim * 2);
 
   noLoop();
 }
@@ -174,6 +174,10 @@ function makeQuestion(){
 
 function questionNumberText(v){
   return v.toString().padStart(2, ' ');
+}
+
+function countNumberText(v){
+  return v.toString().padStart(3, '0');
 }
 
 function dispButton(){
