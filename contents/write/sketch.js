@@ -61,7 +61,7 @@ const sketch003 = function (p) {
 
     p.mouseClicked = function () {
         if(p.mouseX > 0 && p.mouseX < width && p.mouseY > 0 && p.mouseY < height) {
-            const canvasElement = document.querySelector('canvas');
+            const canvasElement = document.querySelector('#canvas002 canvas');
             const dataURL = canvasElement.toDataURL('image/png');
 
             Tesseract.recognize(
