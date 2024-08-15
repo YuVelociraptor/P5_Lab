@@ -19,7 +19,7 @@ let var2 = 0;
 let correct_answer = -99;
 let player_answer = -100;
 
-const answer_max = 16;
+const answer_max = 20;
 
 let count = localStorage.getItem('count');
 if (count === null) {
@@ -75,7 +75,7 @@ function mousePressed() {
   if(display_xo){
     display_xo = false;
 
-    if(correct_answer == player_answer){
+    if(correct_answer === player_answer){
       makeQuestion();
     }
   }else{
