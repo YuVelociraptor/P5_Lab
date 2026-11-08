@@ -14,8 +14,14 @@ class Particle{
     this.x = x;
     this.y = y;
   }
+
+  draw_particle(){
+
+    circle(this.x, this.y, 100);
+  }
 }
 
+const particle_num = 10;
 let particles;
 
 function setup() {
@@ -28,9 +34,10 @@ function setup() {
 function draw() {
   background(255);
 
-  generate();
-  circle(particles[0].x, particles[0].y, 100);
-  particles[0].update(particles[0].x + 2, particles[0].y + 1);
+  for(let i = 0; i < particles.length; i++){
+    particles[i].draw_particle();
+  }
+  update_particles();
 }
 
 // reset board when mouse is pressed
@@ -41,16 +48,43 @@ function mousePressed() {
 // Fill board randomly
 function init() {
 
-  particles = new Array(1);
+  particles = new Array(particle_num);
 
-  p = new Particle(100, 200);
-  particles[0] = p;
-  console.log(particles[0]);
+  for(let i = 0; i < particles.length; i++){
+    p = new Particle(50 * (i + 1),  50 * (i + 1));
+    particles[i] = p;
+  }
 }
 
-// The process of creating the new generation
-function generate() {
+function update_particles() {
 
+  for(let i = 0; i < particles.length; i++){
+    for(let j = 0; j < particles.length; j++){
 
+      if(i != j){
+        f = force(p[i], p[j]);
+
+        particles[i].update(particles[i].x + f[0], particles[i].y + f[1]);
+      }
+    }
+
+  }
 }
 
+function force(particle_org, particle_counter){
+
+  if((particle_org.x - particle_counter.x)^2 + (particle_org.y - particle_counter.y)^2 > 5^2){
+
+    return [0, 0];
+  }
+
+  // repulsive force
+  if((particle_org.x - particle_counter.x)^2 + (particle_org.y - particle_counter.y)^2 > 5^2){
+
+    return [0, 0];
+  }
+  
+  // attractive force
+  return [1, 1];
+
+}
