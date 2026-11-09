@@ -6,18 +6,16 @@
 
 class Particle{
   constructor(x, y){
-    this.x = x;
-    this.y = y;
+    this.position = createVector(x, y);
   }
 
-  update(x, y){
-    this.x = x;
-    this.y = y;
+  update(force_vect){
+    this.position.add(force_vect);
   }
 
   draw_particle(){
 
-    circle(this.x, this.y, 100);
+    circle(this.position.x, this.position.y, 50);
   }
 }
 
@@ -73,23 +71,18 @@ function update_particles() {
 
 function force(particle_org, particle_counter){
 
-  if((particle_org.x - particle_counter.x)^2 + (particle_org.y - particle_counter.y)^2 > 5^2){
+  if(p5.Vector.dist(particle_org, particle_counter) > 5){
 
-    return [0, 0];
+    return createVector(0, 0);
   }
 
-  vec = [
-    particle_counter.x - particle_org.x,
-    particle_counter.y - particle_org.y
-  ]
-
   // repulsive force
-  if((particle_org.x - particle_counter.x)^2 + (particle_org.y - particle_counter.y)^2 < 1^2){
+  if(p5.Vector.dist(particle_org, particle_counter) < 1){
 
-    return vec;
+    return particle_counter.sub(particle_org);
   }
   
   // attractive force
-  return -vec;
+  return particle_org.sub(particle_counter);
 
 }
