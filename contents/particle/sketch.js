@@ -21,7 +21,7 @@ class Particle{
   }
 }
 
-const particle_num = 10;
+const particle_num = 2;
 let particles;
 
 function setup() {
@@ -78,13 +78,18 @@ function force(particle_org, particle_counter){
     return [0, 0];
   }
 
-  // repulsive force
-  if((particle_org.x - particle_counter.x)^2 + (particle_org.y - particle_counter.y)^2 > 5^2){
+  vec = [
+    particle_counter.x - particle_org.x,
+    particle_counter.y - particle_org.y
+  ]
 
-    return [0, 0];
+  // repulsive force
+  if((particle_org.x - particle_counter.x)^2 + (particle_org.y - particle_counter.y)^2 < 1^2){
+
+    return vec;
   }
   
   // attractive force
-  return [1, 1];
+  return -vec;
 
 }
