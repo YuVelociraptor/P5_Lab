@@ -79,10 +79,10 @@ function force(particle_org, particle_counter){
   // repulsive force
   if(p5.Vector.dist(particle_org, particle_counter) < 1){
 
-    return particle_counter.sub(particle_org);
+    return p5.Vector.sub(particle_counter, particle_org);
   }
   
   // attractive force
-  return particle_org.sub(particle_counter);
+  return p5.Vector.sub(particle_org, particle_counter);
 
 }
