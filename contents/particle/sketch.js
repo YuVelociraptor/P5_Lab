@@ -71,13 +71,13 @@ function update_particles() {
 
 function force(particle_org, particle_counter){
 
-  if(p5.Vector.dist(particle_org, particle_counter) > 5){
+  if(p5.Vector.dist(particle_org.position, particle_counter.position) > 5){
 
     return createVector(0, 0);
   }
 
   // repulsive force
-  if(p5.Vector.dist(particle_org, particle_counter) < 1){
+  if(p5.Vector.dist(particle_org.position, particle_counter.position) < 1){
 
     return particle_counter.sub(particle_org);
   }
